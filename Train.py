@@ -37,7 +37,9 @@ if __name__ == "__main__":
     VaildDIR_PATH = "CUFED_SRNTT/CUFED5/"
 
     ResultSave_PATH = "Result_metrics"
+    ResultSave_PATH = os.path.join(os.getcwd(), ResultSave_PATH)
     TrainedMODEL_PATH = "Trained_model"
+    TrainedMODEL_PATH = os.path.join(os.getcwd(), TrainedMODEL_PATH)
 
     if torch.cuda.is_available():
         device = torch.device('cuda')
@@ -46,6 +48,8 @@ if __name__ == "__main__":
 
     prefix_resultname = modelref_utils.getprefixname(modeltype)
 
+    if not os.path.isdir(TrainedMODEL_PATH):
+        os.mkdir(TrainedMODEL_PATH)
     TrainedMODEL_PATH = os.path.join(TrainedMODEL_PATH,prefix_resultname)
     if not os.path.isdir(TrainedMODEL_PATH):
         os.mkdir(TrainedMODEL_PATH)

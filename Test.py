@@ -13,6 +13,7 @@ from PIL import Image
 from collections import OrderedDict
 
 savedir = "Result_image"
+savedir = os.path.join(os.getcwd(), savedir)
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
@@ -28,7 +29,7 @@ if __name__ == "__main__":
 
     opt = parser.parse_args()
 
-    modeltype = opt.model_typ
+    modeltype = opt.model_type
     model_epoch = opt.model_epoch
     showmode = opt.showmode
 
@@ -38,6 +39,8 @@ if __name__ == "__main__":
     model_dirpath = os.path.join("Trained_model",prefix_resultname)
     image_savepath = os.path.join(savedir,prefix_resultname,"epoch{}".format(model_epoch))
 
+    if not os.path.isdir(savedir):
+        os.mkdir(savedir)
     if not os.path.isdir(os.path.join(savedir,prefix_resultname)):
         os.mkdir(os.path.join(savedir,prefix_resultname))
     if not os.path.isdir(image_savepath):
